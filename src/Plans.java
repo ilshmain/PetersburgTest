@@ -1,15 +1,19 @@
 public class Plans implements Comparable<Plans> {
-    private Integer importance;
+    private Double importance;
     private Double time;
     private String place;
 
-    public Plans(Integer importance, Double time, String place) {
+    public Plans(Double importance, Double time, String place) {
         this.importance = importance;
         this.time = time;
         this.place = place;
     }
 
-    public Integer getImportance() {
+    public double valueOneWeight() {
+        return importance/time;
+    }
+
+    public Double getImportance() {
         return importance;
     }
 
@@ -23,20 +27,20 @@ public class Plans implements Comparable<Plans> {
 
     @Override
     public int compareTo(Plans another) {
-        if (this.importance == another.importance)
-            return 0;
-        else if (this.importance < another.importance)
-            return -1;
-        else
-            return 1;
+        int res = this.time.compareTo(another.time);
+        if (res == 0)
+            res = this.importance.compareTo(another.importance);
+        return res;
     }
 
     @Override
     public String toString() {
         return "Plans{" +
-                "importance=" + importance +
-                ", time=" + time +
-                ", place='" + place + '\'' +
+                "Time=" + time +
+                ", importance=" + importance +
+//                ", place='" + place + '\'' +
+                ", %= " + importance/time+
+                
                 '}';
     }
 }
